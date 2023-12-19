@@ -15,9 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/test', function () {
-//     return view('welcome');
-// });
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/account/register', [AccountController::class, 'registration'])->name('account.registration');
 Route::post('/account/proccess-register', [AccountController::class, 'processRegistration'])->name('account.processRegistration');
