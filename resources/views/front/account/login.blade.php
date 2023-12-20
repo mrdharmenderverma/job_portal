@@ -12,20 +12,41 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
+            @if (Session::has('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>
+                        <p class="mb-0">{{ Session::get('error') }}</p>
+                    </strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="row d-flex justify-content-center">
                 <div class="col-md-5">
-                    <div class="card shadow border-0 p-5">
+                    <div class="card shadow border-0 p-5">                        
                         <h1 class="h3">Login</h1>
-                        <form action="">
+                        <form action="{{ route('account.authenticateLogin') }}" method="POST">
+                            @csrf
                             <div class="mb-3">
                                 <label for="" class="mb-2">Email*</label>
-                                <input type="text" name="email" id="email" class="form-control"
-                                    placeholder="example@example.com">
+                                <input type="text" name="email" id="email"
+                                    class="form-control @error('email') is-invalid @enderror"
+                                    placeholder="example@example.com" value="{{ old('email') }}">
+
+                                @error('email')
+                                    <p class="invalid-feedback">{{ $message }}</p>
+                                @enderror
+
                             </div>
                             <div class="mb-3">
                                 <label for="" class="mb-2">Password*</label>
-                                <input type="password" name="password" id="password" class="form-control"
+                                <input type="password" name="password" id="password"
+                                    class="form-control @error('password') is-invalid @enderror"
                                     placeholder="Enter Password">
+
+                                @error('password')
+                                    <p class="invalid-feedback">{{ $message }}</p>
+                                @enderror
+
                             </div>
                             <div class="justify-content-between d-flex">
                                 <button class="btn btn-primary mt-2">Login</button>

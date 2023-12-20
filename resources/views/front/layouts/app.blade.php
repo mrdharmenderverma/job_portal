@@ -10,7 +10,7 @@
     <meta name="HandheldFriendly" content="True" />
     <meta name="pinterest" content="nopin" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
-	<meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}" />
     <!-- Fav Icon -->
     <link rel="shortcut icon" type="image/x-icon" href="#" />
@@ -35,7 +35,15 @@
                             <a class="nav-link" aria-current="page" href="jobs.html">Find Jobs</a>
                         </li>
                     </ul>
-                    <a class="btn btn-outline-primary me-2" href="{{route('account.login')}}" type="submit">Login</a>
+
+                    @if (!Auth::check())
+                        <a class="btn btn-outline-primary me-2" href="{{ route('account.login') }}"
+                            type="submit">Login</a>
+                    @else
+                        <a class="btn btn-outline-primary me-2" href="{{ route('account.profile') }}"
+                            type="submit">Account</a>
+                    @endif
+
                     <a class="btn btn-primary" href="post-job.html" type="submit">Post a Job</a>
                 </div>
             </div>
