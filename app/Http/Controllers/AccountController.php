@@ -19,7 +19,7 @@ class AccountController extends Controller
         
         $validate = Validator::make($request->all(),[
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|same:confirm_password',
             'confirm_password' => 'required'
         ]);
@@ -31,7 +31,7 @@ class AccountController extends Controller
             $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
-            $user->email = Hash::make($request->password);
+            $user->password = Hash::make($request->password);
             // dd($user->all());
             $user->save();
 

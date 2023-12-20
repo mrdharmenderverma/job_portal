@@ -5,15 +5,18 @@
         <div class="container my-5">
             <div class="py-lg-2">&nbsp;</div>
             @if (Session::has('success'))
-                <div class="alert alert-success">
-                    <p>{{ Session::get('success')}}</p>
-                </div>                
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>
+                        <p class="mb-0">{{ Session::get('success') }}</p>
+                    </strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
             @endif
             <div class="row d-flex justify-content-center">
                 <div class="col-md-5">
                     <div class="card shadow border-0 p-5">
                         <h1 class="h3">Login</h1>
-                        <form action="" >
+                        <form action="">
                             <div class="mb-3">
                                 <label for="" class="mb-2">Email*</label>
                                 <input type="text" name="email" id="email" class="form-control"
@@ -31,7 +34,7 @@
                         </form>
                     </div>
                     <div class="mt-4 text-center">
-                        <p>Do not have an account? <a href="{{route('account.registration')}}">Register</a></p>
+                        <p>Do not have an account? <a href="{{ route('account.registration') }}">Register</a></p>
                     </div>
                 </div>
             </div>
