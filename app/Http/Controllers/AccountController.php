@@ -84,11 +84,12 @@ class AccountController extends Controller
         // $user = User::where('id', $id)->first(); 
         // or
         $user = User::find($id);
-        // dd($id);
+        
+        return view('front.account.profile', compact('user'));
 
-        return view('front.account.profile', [
-            'user' => $user
-        ]);
+        // return view('front.account.profile', [
+        //     'user' => $user
+        // ]);
     }
 
     public function updateProfile(Request $request){
