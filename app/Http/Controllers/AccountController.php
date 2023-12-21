@@ -77,7 +77,6 @@ class AccountController extends Controller
     }
 
     public function profile(){
-
         // To get the id of user 
         $id = Auth::user()->id;
 
@@ -86,7 +85,7 @@ class AccountController extends Controller
         $user = User::find($id);
         
         return view('front.account.profile', compact('user'));
-
+        // or
         // return view('front.account.profile', [
         //     'user' => $user
         // ]);
