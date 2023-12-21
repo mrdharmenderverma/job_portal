@@ -30,6 +30,7 @@ Route::group(['account'], function () {
     // Authenticated Routes
     Route::group(['middleware' => 'auth'], function () {
         Route::get('/account/profile', [AccountController::class, 'profile'])->name('account.profile');
+        Route::put('/account/upateProfile', [AccountController::class, 'updateProfile'])->name('account.upateProfile');
         Route::get('/account/logout', [AccountController::class, 'logout'])->name('account.logout');
     });
 });
