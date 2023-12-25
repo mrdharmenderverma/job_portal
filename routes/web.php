@@ -30,6 +30,7 @@ Route::group(['account'], function () {
     // Authenticated Routes
     Route::group(['middleware' => 'auth'], function () {
         Route::get('account/profile', [AccountController::class, 'profile'])->name('account.profile');
+        Route::get('account/post-job', [HomeController::class, 'postJob'])->name('account.postJob');
         Route::put('account/upateProfile', [AccountController::class, 'updateProfile'])->name('account.upateProfile');
         Route::post('account/upate-profile-pic', [AccountController::class, 'updateProfilePic'])->name('account.updateProfilePic');
         Route::get('account/logout', [AccountController::class, 'logout'])->name('account.logout');

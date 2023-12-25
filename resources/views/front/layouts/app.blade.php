@@ -95,28 +95,27 @@
             }
         });
 
-        $('#profilePicForm').submit(function(e){
+        $('#profilePicForm').submit(function(e) {
             e.preventDefault();
 
             var formData = new FormData(this);
 
             $.ajax({
-                url: '{{ route("account.updateProfilePic") }}',
+                url: '{{ route('account.updateProfilePic') }}',
                 type: 'post',
                 dataType: 'json',
                 data: formData,
                 contentType: false,
                 processData: false,
-                success: function(response){
+                success: function(response) {
                     if (response.status == false) {
                         var errors = response.errors;
                         if (errors.image) {
                             $('#image-error').html(errors.image)
-                        }                         
-                    }else{
+                        }
+                    } else {
                         window.location.href = '{{ url()->current() }}';
                     }
-                    
                 }
             });
         });
