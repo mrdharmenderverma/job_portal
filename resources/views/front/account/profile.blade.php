@@ -25,25 +25,25 @@
                             <div class="card-body  p-4">
                                 <h3 class="fs-4 mb-1">My Profile</h3>
                                 <div class="mb-4">
-                                    <label for="" class="mb-2">Name*</label>
+                                    <label for="name" class="mb-2">Name*</label>
                                     <input type="text" placeholder="Enter Name" name="name" id="name"
                                         class="form-control" value="{{ $user->name }}">
                                     <p></p>
                                 </div>
                                 <div class="mb-4">
-                                    <label for="" class="mb-2">Email*</label>
+                                    <label for="email" class="mb-2">Email*</label>
                                     <input type="text" placeholder="Enter Email" name="email" id="email"
                                         class="form-control" value="{{ $user->email }}">
                                     <p></p>
                                 </div>
                                 <div class="mb-4">
-                                    <label for="" class="mb-2">Designation*</label>
+                                    <label for="designation" class="mb-2">Designation*</label>
                                     <input type="text" placeholder="Designation" name="designation" id="designation"
                                         class="form-control" value="{{ $user->designation }}">
                                     {{-- <p></p> --}}
                                 </div>
                                 <div class="mb-4">
-                                    <label for="" class="mb-2">Mobile*</label>
+                                    <label for="mobile" class="mb-2">Mobile*</label>
                                     <input type="integer" placeholder="Mobile" name="mobile" id="mobile"
                                         class="form-control" value="{{ $user->mobile }}">
                                     {{-- <p></p> --}}
@@ -59,19 +59,19 @@
                         <div class="card-body p-4">
                             <h3 class="fs-4 mb-1">Change Password</h3>
                             <div class="mb-4">
-                                <label for="" class="mb-2">Old Password*</label>
-                                <input type="password" placeholder="Old Password" class="form-control">
+                                <label for="old_password" class="mb-2">Old Password*</label>
+                                <input type="password" placeholder="Old Password" class="form-control" id="old_password">
                             </div>
                             <div class="mb-4">
-                                <label for="" class="mb-2">New Password*</label>
-                                <input type="password" placeholder="New Password" class="form-control">
+                                <label for="new_password" class="mb-2">New Password*</label>
+                                <input type="password" placeholder="New Password" class="form-control" id="new_password">
                             </div>
                             <div class="mb-4">
-                                <label for="" class="mb-2">Confirm Password*</label>
-                                <input type="password" placeholder="Confirm Password" class="form-control">
+                                <label for="confirm_password" class="mb-2">Confirm Password*</label>
+                                <input type="password" placeholder="Confirm Password" class="form-control" id="confirm_password">
                             </div>
                         </div>
-                        <div class="card-footer  p-4">
+                        <div class="card-footer p-4">
                             <button type="button" class="btn btn-primary">Update</button>
                         </div>
                     </div>
