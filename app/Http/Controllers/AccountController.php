@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\category;
+use App\Models\JobType;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -96,14 +98,14 @@ class AccountController extends Controller
     }
 
     public function updateProfile(Request $request)
-    {   
+    {
         $id = Auth::user()->id;
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'name' => 'required|min:5|max:20',
-            'email' => 'required|email|unique:users,email,'.$id.',id'
+            'email' => 'required|email|unique:users,email,' . $id . ',id'
         ]);
 
-        if($validator->passes()){
+        if ($validator->passes()) {
 
             $user = User::find($id);
             $user->name = $request->name;
@@ -118,8 +120,7 @@ class AccountController extends Controller
                 'status' => true,
                 'errors' => []
             ]);
-
-        }else{
+        } else {
             return response()->json([
                 'status' => false,
                 'errors' => $validator->errors()
@@ -133,20 +134,21 @@ class AccountController extends Controller
         return redirect()->route('account.login');
     }
 
-    public function updateProfilePic(Request $request){
+    public function updateProfilePic(Request $request)
+    {
 
         $id = Auth::user()->id;
 
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'image' => 'required|image'
         ]);
 
         if ($validator->passes()) {
             $image = $request->image;
             $ext = $image->getClientOriginalExtension();
-            $imageName = $id.'-'.time().'.'.$ext; //3-time-extensionName
-            $image->move(public_path('/profile_pic/'),$imageName);
-            
+            $imageName = $id . '-' . time() . '.' . $ext; //3-time-extensionName
+            $image->move(public_path('/profile_pic/'), $imageName);
+
             User::where('id', $id)->update(['image' => $imageName]);
 
             session()->flash('success', 'Profile picture update successfully');
@@ -155,8 +157,45 @@ class AccountController extends Controller
                 'status' => true,
                 'errors' => []
             ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors()
+            ]);
+        }
+    }
 
-        }else{
+    public function postJob()
+    {
+        $categories = Category::orderBy('name', 'ASC')->where('status', 1)->get();
+
+        $jobTypes = JobType::orderBy('name', 'ASC')->where('status', 1)->get();
+
+        return view('front.post-job', compact('categories', 'jobTypes'));
+    }
+
+    public function savePostJob(Request $request)
+    {
+        // dd($request->all());
+        $rules = [
+            'title' => 'required|min:5|max:200',
+            'category' => 'required',
+            'jobType' => 'required',
+            'vacancy' => 'required|integer',
+            'location' => 'required|max:50',
+            'description' => 'required',
+            'company_name' => 'required|main:3|max:75'
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->passes()) {
+            
+            return response()->json([
+                'status' => true,
+                'errors' => []
+            ]);
+        } else {
             return response()->json([
                 'status' => false,
                 'errors' => $validator->errors()
