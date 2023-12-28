@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-lg-9">
                     <form action="" id="createJobForm" name="createJobForm">
-                        @csrf
+                        {{-- @csrf --}}
                         <div class="card border-0 shadow mb-4 ">
                             <div class="card-body card-form p-4">
                                 <h3 class="fs-4 mb-1">Job Details</h3>
@@ -35,7 +35,7 @@
                                         <select name="category" id="category" class="form-control">
                                             <option value="">Select Category</option>
                                             @foreach ($categories as $category)
-                                                <option value="{{ $category->name }}">{{ $category->name }}</option>
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
                                         </select>
                                         <p></p>
@@ -46,9 +46,11 @@
                                         <label for="jobType" class="mb-2">Job Type<span class="req">*</span></label>
                                         <select class="form-select" name="jobType" id="jobType">
                                             <option value="">Select Job Type</option>
-                                            @foreach ($jobTypes as $jobtype)
-                                                <option value="{{ $jobtype->name }}">{{ $jobtype->name }}</option>
-                                            @endforeach
+                                            @if ($jobTypes->isNotEmpty())
+                                                @foreach ($jobTypes as $jobtype)
+                                                    <option value="{{ $jobtype->id }}">{{ $jobtype->name }}</option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                         <p></p>
                                     </div>
@@ -94,8 +96,7 @@
                                         placeholder="Qualifications"></textarea>
                                 </div>
                                 <div class="mb-4">
-                                    <label for="experience" class="mb-2">Experience <span
-                                            class="req">*</span></label>
+                                    <label for="experience" class="mb-2">Experience </label>
                                     <select id="experience" name="experience" class="form-control">
                                         <option value="">Select Experience</option>
                                         <option value="1">1 Year</option>
@@ -171,37 +172,37 @@
                             .removeClass('invalid-feedback')
                             .html()
 
-                        $('#category').addClass('is-invalid')
+                        $('#category').removeClass('is-invalid')
                             .siblings('p')
-                            .addClass('invalid-feedback')
-                            .html(errors.title)
+                            .removeClass('invalid-feedback')
+                            .html()
 
-                        $('#jobType').addClass('is-invalid')
+                        $('#jobType').removeClass('is-invalid')
                             .siblings('p')
-                            .addClass('invalid-feedback')
-                            .html(errors.jobType)
+                            .removeClass('invalid-feedback')
+                            .html()
 
-                        $('#vacancy').addClass('is-invalid')
+                        $('#vacancy').removeClass('is-invalid')
                             .siblings('p')
-                            .addClass('invalid-feedback')
-                            .html(errors.vacancy)
+                            .removeClass('invalid-feedback')
+                            .html()
 
-                        $('#location').addClass('is-invalid')
+                        $('#location').removeClass('is-invalid')
                             .siblings('p')
-                            .addClass('invalid-feedback')
-                            .html(errors.location)
+                            .removeClass('invalid-feedback')
+                            .html()
 
-                        $('#description').addClass('is-invalid')
+                        $('#description').removeClass('is-invalid')
                             .siblings('p')
-                            .addClass('invalid-feedback')
-                            .html(errors.description)
+                            .removeClass('invalid-feedback')
+                            .html()
 
                         $('#company_name').removeClass('is-invalid')
                             .siblings('p')
                             .removeClass('invalid-feedback')
                             .html()
 
-                        window.location.href = "{{ route('account.savePostJob') }}";
+                        window.location.href = "{{ route('account.myJobs') }}";
                     } else {
                         var errors = response.errors
 
