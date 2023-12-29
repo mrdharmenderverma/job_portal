@@ -68,7 +68,8 @@
                             </div>
                             <div class="mb-4">
                                 <label for="confirm_password" class="mb-2">Confirm Password*</label>
-                                <input type="password" placeholder="Confirm Password" class="form-control" id="confirm_password">
+                                <input type="password" placeholder="Confirm Password" class="form-control"
+                                    id="confirm_password">
                             </div>
                         </div>
                         <div class="card-footer p-4">
@@ -87,7 +88,7 @@
             e.preventDefault();
 
             $.ajax({
-                url: '{{ route('account.upateProfile') }}',
+                url: "{{ route('account.upateProfile') }}",
                 type: 'PUT',
                 dataTpe: 'json',
                 data: $("#userForm").serializeArray(),
@@ -104,7 +105,7 @@
                             .removeClass('invalid-feedback')
                             .html('')
 
-                        window.location.href = '{{ route("account.profile") }}';
+                        window.location.href = '{{ route('account.profile') }}';
                     } else {
                         var errors = response.errors;
 
