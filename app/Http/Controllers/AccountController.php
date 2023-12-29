@@ -184,6 +184,7 @@ class AccountController extends Controller
             'jobType' => 'required',
             'vacancy' => 'required|integer',
             'location' => 'required|max:50',
+            'experience' => 'required',
             'description' => 'required',
             'company_name' => 'required|min:3|max:75'
         ];
@@ -211,7 +212,7 @@ class AccountController extends Controller
 
             $job->save();
 
-            session()->flash('success', 'Addedd Successfully');
+            session()->flash('success', 'Job Addedd Successfully');
 
             return response()->json([
                 'status' => true,
@@ -227,6 +228,6 @@ class AccountController extends Controller
 
 
     public function myJobs(){
-        return "test";
+        return view('front.account.job.my-jobs');
     }
 }

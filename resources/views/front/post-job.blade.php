@@ -96,7 +96,8 @@
                                         placeholder="Qualifications"></textarea>
                                 </div>
                                 <div class="mb-4">
-                                    <label for="experience" class="mb-2">Experience </label>
+                                    <label for="experience" class="mb-2">Experience<span
+                                            class="req">*</span></label>
                                     <select id="experience" name="experience" class="form-control">
                                         <option value="">Select Experience</option>
                                         <option value="1">1 Year</option>
@@ -111,8 +112,6 @@
                                         <option value="10">10 Years</option>
                                         <option value="10_plus">10+ Years</option>
                                     </select>
-                                    {{-- <input type="text" placeholder="Experience" 
-                                        class="form-control"> --}}
                                 </div>
                                 <div class="mb-4">
                                     <label for="keywords" class="mb-2">Keywords</label>
@@ -192,6 +191,11 @@
                             .removeClass('invalid-feedback')
                             .html()
 
+                        $('#experience').removeClass('is-invalid')
+                            .siblings('p')
+                            .removeClass('invalid-feedback')
+                            .html()
+
                         $('#description').removeClass('is-invalid')
                             .siblings('p')
                             .removeClass('invalid-feedback')
@@ -203,8 +207,9 @@
                             .html()
 
                         window.location.href = "{{ route('account.myJobs') }}";
+
                     } else {
-                        var errors = response.errors
+                        var errors = response.errors;
 
                         if (errors.title) {
                             $('#title').addClass('is-invalid')
@@ -261,6 +266,18 @@
                                 .html(errors.location)
                         } else {
                             $('#location').removeClass('is-invalid')
+                                .siblings('p')
+                                .removeClass('invalid-feedback')
+                                .html()
+                        }
+
+                        if (errors.experience) {
+                            $('#experience').addClass('is-invalid')
+                                .siblings('p')
+                                .addClass('invalid-feedback')
+                                .html(errors.experience)
+                        } else {
+                            $('#experience').removeClass('is-invalid')
                                 .siblings('p')
                                 .removeClass('invalid-feedback')
                                 .html()
