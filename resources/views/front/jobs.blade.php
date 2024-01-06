@@ -36,7 +36,7 @@
                                 <option value="">Select a Category</option>
                                 @if ($categories)
                                     @foreach ($categories as $category)
-                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 @endif
                             </select>
@@ -44,29 +44,16 @@
 
                         <div class="mb-4">
                             <h2>Job Type</h2>
-                            <div class="form-check mb-2">
-                                <input class="form-check-input " name="job_type" type="checkbox" value="1"
-                                    id="">
-                                <label class="form-check-label " for="">Full Time</label>
-                            </div>
+                            @if ($jobTypes->isNotEmpty())
+                                @foreach ($jobTypes as $jobType)
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input " name="job_type" type="checkbox" value="{{$jobType->id}}"
+                                            id="job-type-{{$jobType->id}}">
+                                        <label class="form-check-label " for="job-type-{{$jobType->id}}">{{$jobType->name}}</label>
+                                    </div>
+                                @endforeach
+                            @endif
 
-                            <div class="form-check mb-2">
-                                <input class="form-check-input school-section" name="job_type" type="checkbox"
-                                    value="1" id="">
-                                <label class="form-check-label " for="">Part Time</label>
-                            </div>
-
-                            <div class="form-check mb-2">
-                                <input class="form-check-input school-section" name="job_type" type="checkbox"
-                                    value="1" id="">
-                                <label class="form-check-label " for="">Freelance</label>
-                            </div>
-
-                            <div class="form-check mb-2">
-                                <input class="form-check-input school-section" name="job_type" type="checkbox"
-                                    value="1" id="">
-                                <label class="form-check-label " for="">Remote</label>
-                            </div>
                         </div>
 
                         <div class="mb-4">
