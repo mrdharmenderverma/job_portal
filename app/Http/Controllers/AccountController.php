@@ -234,4 +234,25 @@ class AccountController extends Controller
 
         return view('front.account.job.my-jobs', compact('jobs'));
     }
+
+    public function deleteJob(Request $request){
+
+        $job = Job::where([
+            'user_id' => Auth::user()->id,
+            'id' => $request->jobId,
+        ])->first();
+
+        if ($job == null) {
+            session()->flash('error', 'Either job deleted or not found');
+            return response()->json([
+                'status' => true,
+            ]);
+        }
+
+        Job::where('id', $request->jobId)->delete();
+        session()->flash('success', 'Job deleted successfully');
+        return response()->json([
+            'status' => true
+        ]);
+    }
 }
