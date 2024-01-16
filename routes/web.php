@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/jobs', [JobController::class, 'jobs'])->name('jobs');
+Route::get('/jobs/details/{id}', [JobController::class, 'detail'])->name('JobDetail');
 
 Route::group(['account'], function () {
 

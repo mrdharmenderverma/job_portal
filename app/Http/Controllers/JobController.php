@@ -18,4 +18,16 @@ class JobController extends Controller
 
         return view('front.jobs', compact('categories', 'jobTypes', 'jobs'));
     }
+
+    // This method will show job details page
+    public function detail($id){
+
+        $job = Job::Where(['id' => $id, 'status' => 1]);
+
+        if ($job == null) {
+            abort(404);
+        }
+        return view('front.jobDetail', compact('job'));
+        // return view('front.jobDetail', ['job' => $job]);
+    }
 }
